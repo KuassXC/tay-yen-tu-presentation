@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tây Yên Tử - Tuyệt tác Bắc Giang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #1b4332;
+        --secondary: #d4af37;
+        --accent: #b7efc5;
+        --white: #ffffff;
+        --glass: rgba(255, 255, 255, 0.12);
+        --glass-strong: rgba(0, 0, 0, 0.6);
+        --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #050f0c;
+        font-family: "Montserrat", sans-serif;
+        color: var(--white);
+        overflow-x: hidden;
+        /* Scroll Snap Setup */
+        scroll-snap-type: y mandatory;
+        height: 100vh;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Slide Core Layout */
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        /* Force GPU for smoother snapping */
+        transform: translateZ(0);
+      }
+
+      .container {
+        width: 85%;
+        max-width: 1200px;
+        z-index: 5;
+        position: relative;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Background Image Styling - Optimized for Performance */
+      .bg-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: brightness(0.6);
+        /* Phóng lớn ảnh nền mượt mà hơn */
+        transition: transform 12s var(--ease-smooth);
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: scale(1.01); /* Tránh rung giật khi bắt đầu */
+      }
+      .slide:hover .bg-img {
+        transform: scale(1.1);
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent 40%,
+          rgba(0, 0, 0, 0.8)
+        );
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      /* Elements Animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s var(--ease-smooth),
+          transform 1s var(--ease-smooth);
+        will-change: transform, opacity;
+      }
+      .active .reveal {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Slide 1: Hero */
+      .hero-title {
+        font-size: 85px;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .hero-sub {
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        color: var(--secondary);
+        margin-bottom: 10px;
+        font-weight: 300;
+      }
+
+      /* Glass Box */
+      .glass-box {
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 50px;
+        border-radius: 30px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        transform: translateZ(0);
+      }
+
+      /* Grid Layouts */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      /* Feature Cards - Fixed Hover Stutter */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        margin-top: 40px;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        transition: all 0.4s var(--ease-smooth);
+        will-change: transform, background-color;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+      .card:hover {
+        background: var(--secondary);
+        transform: translateY(-10px) translateZ(0);
+        color: var(--primary);
+        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+      }
+      .card i {
+        font-size: 40px;
+        margin-bottom: 20px;
+        color: var(--secondary);
+        transition: color 0.4s;
+      }
+      .card:hover i {
+        color: var(--primary);
+      }
+
+      /* Section Numbers */
+      .section-num {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--secondary);
+        border-left: 3px solid var(--secondary);
+        padding-left: 15px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      /* Quote */
+      blockquote {
+        font-size: 42px;
+        line-height: 1.4;
+        font-family: "Playfair Display";
+        font-style: italic;
+        position: relative;
+      }
+      blockquote::before {
+        content: '"';
+        font-size: 100px;
+        position: absolute;
+        top: -50px;
+        left: -40px;
+        opacity: 0.2;
+        color: var(--secondary);
+      }
+
+      /* Navigation Hint */
+      .scroll-hint {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        text-align: center;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0) translateX(-50%);
+        }
+        40% {
+          transform: translateY(-10px) translateX(-50%);
+        }
+        60% {
+          transform: translateY(-5px) translateX(-50%);
+        }
+      }
+
+      /* Table Style */
+      .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+      }
+      .custom-table th {
+        text-align: left;
+        padding: 15px;
+        border-bottom: 2px solid var(--secondary);
+        color: var(--secondary);
+      }
+      .custom-table td {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Slide 1: Welcome -->
+    <section class="slide active">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1920"
+        alt="Núi rừng hùng vĩ"
+      />
+      <div class="overlay"></div>
+      <div class="container" style="text-align: center">
+        <p class="hero-sub reveal">Di sản ngàn năm - Bắc Giang</p>
+        <h1 class="hero-title reveal">TÂY YÊN TỬ</h1>
+        <p class="reveal" style="font-size: 24px; font-weight: 300">
+          Nơi giao thoa giữa mây trời và lịch sử
+        </p>
+      </div>
+      <div class="scroll-hint">
+        <i class="fa-solid fa-chevron-down"></i> Cuộn để khám phá
+      </div>
+    </section>
+
+    <!-- Slide 2: Location -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://cdn.cizucu.com/images/photos/egokQDushO2nWYqt1QwM.jpg?auto=format%2Ccompress&fit=max&w=1536&q=90"
+        alt="Mây núi"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="grid-2">
+          <div class="reveal">
+            <span class="section-num">01. VỊ TRÍ ĐẮC ĐỊA</span>
+            <h2 style="font-size: 45px; margin-bottom: 25px">
+              Cánh cổng phía Tây của thánh địa Yên Tử
+            </h2>
+            <p style="font-size: 18px; line-height: 1.8; opacity: 0.9">
+              Tọa lạc tại huyện Sơn Động, tỉnh Bắc Giang, Tây Yên Tử không chỉ
+              là một danh thắng, mà còn là hành trình đi tìm sự bình yên trong
+              tâm hồn giữa thiên nhiên hoang sơ.
+            </p>
+            <div style="margin-top: 30px">
+              <p>
+                <i
+                  class="fa-solid fa-location-arrow"
+                  style="color: var(--secondary)"
+                ></i>
+                Cách Hà Nội 120km
+              </p>
+              <p>
+                <i
+                  class="fa-solid fa-cloud"
+                  style="color: var(--secondary)"
+                ></i>
+                Độ cao trung bình 1.000m so với mực nước biển
+              </p>
+            </div>
+          </div>
+          <div
+            class="glass-box reveal"
+            style="padding: 20px; border-radius: 20px"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c9/T%C3%A2y_Y%C3%AAn_T%E1%BB%AD.jpg"
+              style="width: 100%; border-radius: 15px"
+              alt="Toàn cảnh"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Values -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen-tu-8.jpg"
+        alt="Chùa cổ"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">02. GIÁ TRỊ CỐT LÕI</span>
+        <h2 style="font-size: 45px; text-align: center; margin-bottom: 10px">
+          Ba trụ cột di sản
+        </h2>
+        <div class="card-grid">
+          <!-- Đã đồng bộ tốc độ xuất hiện cho cả 3 mục -->
+          <div class="card reveal">
+            <i class="fa-solid fa-dharmachakra"></i>
+            <h3>Phật Giáo Trúc Lâm</h3>
+            <p>Con đường tu hành của Phật Hoàng Trần Nhân Tông.</p>
+          </div>
+          <div class="card reveal">
+            <i class="fa-solid fa-mountain"></i>
+            <h3>Rừng Nguyên Sinh</h3>
+            <p>Hệ sinh thái đặc hữu với hàng ngàn loài thực vật quý hiếm.</p>
+          </div>
+          <div class="card reveal">
+            <i class="fa-solid fa-landmark"></i>
+            <h3>Kiến Trúc Lý - Trần</h3>
+            <p>Tái hiện vẻ đẹp lộng lẫy của các vương triều vàng son.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Great Wall of Vietnam -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://media.mybacgiang.vn/resources/portal//Images/BGG/admin.dulich/tay_yen_tu/9_982695817.jpg"
+        alt="Đường đá núi"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="grid-2">
+          <div class="glass-box reveal">
+            <h2 style="color: var(--secondary); font-size: 38px">
+              "Vạn Lý Trường Thành" phiên bản Việt
+            </h2>
+            <p style="margin-top: 20px; font-size: 18px; line-height: 1.6">
+              Những bậc thang đá dài tít tắp men theo sườn núi tạo nên một khung
+              cảnh hùng vĩ, là điểm thách thức sức bền và cũng là nơi cho ra đời
+              những bức ảnh "triệu view".
+            </p>
+          </div>
+          <div class="reveal" style="text-align: right">
+            <h1
+              style="
+                font-size: 120px;
+                opacity: 0.2;
+                color: var(--secondary);
+                line-height: 1;
+              "
+            >
+              MAJESTIC
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Experiences -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1920"
+        alt="Trải nghiệm"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">03. TRẢI NGHIỆM ĐÁNG GIÁ</span>
+        <div class="grid-2" style="margin-top: 20px">
+          <div class="reveal">
+            <div
+              style="
+                background: rgba(212, 175, 55, 0.1);
+                padding: 25px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+                border-left: 4px solid var(--secondary);
+              "
+            >
+              <h4 style="font-size: 22px; color: var(--secondary)">
+                <i class="fa-solid fa-cable-car"></i> Cáp treo xuyên mây
+              </h4>
+              <p>Ngắm nhìn toàn cảnh thảm rừng xanh mướt từ trên cao.</p>
+            </div>
+            <div
+              style="
+                background: rgba(212, 175, 55, 0.1);
+                padding: 25px;
+                border-radius: 15px;
+                border-left: 4px solid var(--secondary);
+              "
+            >
+              <h4 style="font-size: 22px; color: var(--secondary)">
+                <i class="fa-solid fa-camera"></i> Săn mây Cổng Trời
+              </h4>
+              <p>Chạm tay vào làn sương mờ ảo lúc bình minh.</p>
+            </div>
+          </div>
+          <div class="reveal">
+            <table class="custom-table">
+              <tr>
+                <th>Dịch vụ</th>
+                <th>Giá vé (Tham khảo)</th>
+              </tr>
+              <tr>
+                <td>Cáp treo khứ hồi</td>
+                <td>260.000đ</td>
+              </tr>
+              <tr>
+                <td>Xe điện chuyển tiếp</td>
+                <td>20.000đ</td>
+              </tr>
+              <tr>
+                <td>Combo Ăn trưa</td>
+                <td>~150.000đ</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Quote & Message -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920"
+        alt="Hoàng hôn"
+      />
+      <div class="overlay"></div>
+      <div class="container" style="text-align: center">
+        <div class="reveal">
+          <blockquote>
+            "Bắc Giang không chỉ có vải thiều. Bắc Giang còn có một Tây Yên Tử
+            hùng vĩ và linh thiêng, đang chờ bước chân tuổi trẻ của chúng mình
+            đến khám phá."
+          </blockquote>
+          <div style="margin-top: 50px">
+            <p style="font-size: 20px; letter-spacing: 5px">
+              #GENZ #EXPLORE #BACGIANG
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Contact -->
+    <section class="slide" style="background: #1b4332">
+      <div class="container" style="text-align: center">
+        <h2 class="reveal" style="font-size: 70px; color: var(--secondary)">
+          HÃY ĐẾN VÀ CẢM NHẬN!
+        </h2>
+        <p
+          class="reveal"
+          style="margin-top: 20px; font-size: 20px; opacity: 0.8"
+        >
+          Cảm ơn thầy cô và các bạn đã lắng nghe bài thuyết trình.
+        </p>
+        <div
+          class="reveal"
+          style="
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+          "
+        >
+          <div class="card" style="width: 200px">
+            <i class="fa-brands fa-facebook"></i>
+            <p>Fanpage</p>
+          </div>
+          <div class="card" style="width: 200px">
+            <i class="fa-brands fa-tiktok"></i>
+            <p>TikTok</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Reveal animation on scroll with debouncing for performance
+      const observerOptions = {
+        threshold: 0.4,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            // Tùy chọn: Xóa active khi trượt qua để tiết kiệm tài nguyên
+            // entry.target.classList.remove('active');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".slide").forEach((slide) => {
+        observer.observe(slide);
+      });
+    </script>
+  </body>
+</html>
