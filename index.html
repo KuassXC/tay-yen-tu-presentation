@@ -21,7 +21,6 @@
         --accent: #b7efc5;
         --white: #ffffff;
         --glass: rgba(255, 255, 255, 0.12);
-        --glass-strong: rgba(0, 0, 0, 0.6);
         --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
       }
 
@@ -36,14 +35,12 @@
         font-family: "Montserrat", sans-serif;
         color: var(--white);
         overflow-x: hidden;
-        /* Scroll Snap Setup */
         scroll-snap-type: y mandatory;
         height: 100vh;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
       }
 
-      /* Slide Core Layout */
       .slide {
         width: 100vw;
         height: 100vh;
@@ -55,7 +52,6 @@
         overflow: hidden;
         scroll-snap-align: start;
         scroll-snap-stop: always;
-        /* Force GPU for smoother snapping */
         transform: translateZ(0);
       }
 
@@ -72,7 +68,6 @@
         font-family: "Playfair Display", serif;
       }
 
-      /* Background Image Styling - Optimized for Performance */
       .bg-img {
         position: absolute;
         top: 0;
@@ -81,12 +76,11 @@
         height: 100%;
         object-fit: cover;
         z-index: 1;
-        filter: brightness(0.6);
-        /* Phóng lớn ảnh nền mượt mà hơn */
+        filter: brightness(0.5);
         transition: transform 12s var(--ease-smooth);
         will-change: transform;
         backface-visibility: hidden;
-        transform: scale(1.01); /* Tránh rung giật khi bắt đầu */
+        transform: scale(1.02);
       }
       .slide:hover .bg-img {
         transform: scale(1.1);
@@ -101,132 +95,108 @@
         background: linear-gradient(
           to bottom,
           transparent 40%,
-          rgba(0, 0, 0, 0.8)
+          rgba(0, 0, 0, 0.85)
         );
         z-index: 2;
         pointer-events: none;
       }
 
-      /* Elements Animations */
       .reveal {
         opacity: 0;
         transform: translateY(30px);
-        transition: opacity 1s var(--ease-smooth),
-          transform 1s var(--ease-smooth);
-        will-change: transform, opacity;
+        transition: opacity 0.8s var(--ease-smooth),
+          transform 0.8s var(--ease-smooth);
       }
       .active .reveal {
         opacity: 1;
         transform: translateY(0);
       }
 
-      /* Slide 1: Hero */
       .hero-title {
-        font-size: 85px;
+        font-size: 80px;
         line-height: 1.1;
         margin-bottom: 20px;
       }
       .hero-sub {
-        font-size: 20px;
+        font-size: 18px;
         text-transform: uppercase;
         letter-spacing: 8px;
         color: var(--secondary);
-        margin-bottom: 10px;
-        font-weight: 300;
+        margin-bottom: 15px;
       }
 
-      /* Glass Box */
       .glass-box {
         background: var(--glass);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 50px;
+        padding: 40px;
         border-radius: 30px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        transform: translateZ(0);
       }
 
-      /* Grid Layouts */
       .grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        gap: 50px;
         align-items: center;
       }
 
-      /* Feature Cards - Fixed Hover Stutter */
       .card-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-        margin-top: 40px;
+        gap: 20px;
+        margin-top: 30px;
       }
       .card {
         background: rgba(255, 255, 255, 0.05);
-        padding: 30px;
+        padding: 25px;
         border-radius: 20px;
         border: 1px solid rgba(255, 255, 255, 0.1);
         text-align: center;
-        transition: all 0.4s var(--ease-smooth);
-        will-change: transform, background-color;
-        transform: translateZ(0);
-        backface-visibility: hidden;
+        transition: 0.4s var(--ease-smooth);
       }
       .card:hover {
         background: var(--secondary);
-        transform: translateY(-10px) translateZ(0);
         color: var(--primary);
-        box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        transform: translateY(-10px);
       }
       .card i {
-        font-size: 40px;
-        margin-bottom: 20px;
+        font-size: 35px;
+        margin-bottom: 15px;
         color: var(--secondary);
-        transition: color 0.4s;
       }
       .card:hover i {
         color: var(--primary);
       }
 
-      /* Section Numbers */
       .section-num {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
         color: var(--secondary);
         border-left: 3px solid var(--secondary);
         padding-left: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         display: block;
       }
 
-      /* Quote */
       blockquote {
-        font-size: 42px;
+        font-size: 36px;
         line-height: 1.4;
         font-family: "Playfair Display";
         font-style: italic;
         position: relative;
-      }
-      blockquote::before {
-        content: '"';
-        font-size: 100px;
-        position: absolute;
-        top: -50px;
-        left: -40px;
-        opacity: 0.2;
-        color: var(--secondary);
+        max-width: 900px;
+        margin: 0 auto;
       }
 
-      /* Navigation Hint */
       .scroll-hint {
         position: absolute;
         bottom: 30px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 10;
-        text-align: center;
         animation: bounce 2s infinite;
+        opacity: 0.7;
       }
       @keyframes bounce {
         0%,
@@ -239,25 +209,40 @@
         40% {
           transform: translateY(-10px) translateX(-50%);
         }
-        60% {
-          transform: translateY(-5px) translateX(-50%);
-        }
       }
 
-      /* Table Style */
+      .timeline {
+        border-left: 2px solid var(--secondary);
+        padding-left: 30px;
+        margin-left: 20px;
+      }
+      .timeline-item {
+        margin-bottom: 30px;
+        position: relative;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -41px;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+        background: var(--secondary);
+        border-radius: 50%;
+      }
+
       .custom-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 30px;
       }
       .custom-table th {
         text-align: left;
-        padding: 15px;
+        padding: 12px;
         border-bottom: 2px solid var(--secondary);
         color: var(--secondary);
       }
       .custom-table td {
-        padding: 15px;
+        padding: 12px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
     </style>
@@ -268,62 +253,60 @@
       <img
         class="bg-img"
         src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1920"
-        alt="Núi rừng hùng vĩ"
+        alt="Background"
       />
       <div class="overlay"></div>
       <div class="container" style="text-align: center">
         <p class="hero-sub reveal">Di sản ngàn năm - Bắc Giang</p>
         <h1 class="hero-title reveal">TÂY YÊN TỬ</h1>
-        <p class="reveal" style="font-size: 24px; font-weight: 300">
-          Nơi giao thoa giữa mây trời và lịch sử
+        <p
+          class="reveal"
+          style="font-size: 22px; font-weight: 300; opacity: 0.9"
+        >
+          Bản giao hưởng giữa Mây ngàn và Đất Phật
         </p>
       </div>
-      <div class="scroll-hint">
-        <i class="fa-solid fa-chevron-down"></i> Cuộn để khám phá
-      </div>
+      <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i></div>
     </section>
 
     <!-- Slide 2: Location -->
     <section class="slide">
       <img
         class="bg-img"
-        src="https://cdn.cizucu.com/images/photos/egokQDushO2nWYqt1QwM.jpg?auto=format%2Ccompress&fit=max&w=1536&q=90"
-        alt="Mây núi"
+        src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIVFRUVFhgXFhcYGBcXGhkaGBYXFxUYGRgYHSggGBslHhcYITEiJSkrLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGyslICUtLy8tMC03Lys3LS0tLS8tLS0tLS0rLS8tLS0tLS0tLS0tLy0tLS0tLS0tLS0tLS0tLf/AABEIALMBGQMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAFAAECAwQGB//EAEMQAAEDAgQDBQUGAgkEAwEAAAEAAhEDIQQSMUEFUWEGEyJxgTKRobHwFEJSwdHhFSMWM0NTYnKCkqKT0uLxY7LCJP/EABoBAAMBAQEBAAAAAAAAAAAAAAABAgMEBQb/xAAwEQACAgEDAgIIBwEBAAAAAAAAAQIRAxIhMQRBE1EFIjJhcbHR8BSBkaHB4fFCJP/aAAwDAQACEQMRAD8A70KQTBSC6DMcJ0k6QCSSSQAkkkkDEkknQAydJJACSSSQAkkkkDEEkkkAJJJOgBkk6SQDJJJIGMknSQMZJOlCAGhKFKE8JWOiEJ4U4ShKx0QhPCnCcNSsdEIShW5UsqLHRjCkEwThaGA6dJJACSSToASZOkgBJJJIGJJJJACSTpIAZOkkkAkkkkDEknSQFDJJ0kh0MkknRY6GSTwklY6GhSASAUgErHRGFIBSAUg1Kx0Qyp8qtDVIMSsqioNUgxXBikGKbHRUGJ+7WgMT5ErCgGE4TJwug5h06ZOgBJ0ydACSWXE8QpU/aqNBG0yfcLrPgeM06r8gDgds0Cegg6/onpdWLUroJJJJJFUJJJOkFCSThqpqYqm0w57AeRcB+aALU6zfb6P96y/+IK+m4OEtII5ggj3hDtDQ6dJJKx0JOkklY6GTp4Twix0RTKeVKErHRGE4ClCcNSsdDAKYCcBTAU2VQwaphqQCmApch6RBqkGpwpBS5FaRBqkGpBSCTkFEgE8JBSSsRzYTVHholxAA1JMD3lc3U7UOvlpNA2zEk+sQhGLxj6pzPdJ2Gw8hsvSWFvk895l2O2o46k8w2ownkCPoq6tVawZnuDRzK89lMHKvAXmT478jqsZ2iaDFNub/ABGQPQan4IbiuN1niJDAdcsj4zKE5kpWixxRm8kmWNhSBVTSnDlZIbwPHajT4znb1gOHkd/VG/4xQie89IdPuhcUptcspYos0jlkg/iu0R0psAHN1z7hp7ysr+N1z98Dya385QrMlKpY4rsJ5JPuX1qznmXOLjzJJURCrBSzKiS5TY8i7SQeYMfJUBycFAwtgeL1GuGdxe3cGJ8wefz+KNYTi1J5gyw7ZtD6j84XJNcptcspYos2jlkjsauPpNmajbbC59wVB41R2Lj5N/WFzMpSpWCJXjSDjuPHamOkk/kFlr8WqutmDR/hEfHX4oapAq1jiuxDySfcJYTi9Rgj2/8ANJI9ZVVfilZxnOW9G2H6n1KyBOAjRG7oeuVchjg/E6jqjabyCCCAYvOok76R6roMq4llrixFwUWwXGqjT/M8bfTMPI7+q58uFveJviypbSOhAUgqcLi6dT2HAnlofcVoyridrk61T4EFILNi8ZTpDxujkNSfILn8Xx6s4nu4Y3awJ9Zke5XDFOfBM8kY8nVhOFxR4piD/au9Mo+QWnBcdqss/wDmDqYI9QPmFUulnRC6iLOulOCucw/aQ/2lPfVp28jr71vbxyhE5iOmV0/ALGWHIuxoskH3CwKlK5nF9qACQxgPIuMf8QNPMj0WH+kVf8dP/aP1Vx6fIyHkgcSXqWZZxU6p8y9ezyKL8ykHDqqQ5LvOqVlJF4KUrP345hL7SEWFGmUzSspxYSOKHXzS1Do2B6lKwtrA7q1tRFhRrzJpVGdP3qLHReHJ8yziopZkWFF0pw5ZxUF7i2vTzT50rHRpD1MPWTvE5qIsdG1r1YHIf34G6j9uCNQ6CmZOChI4h0UzxEcilqCgrmUg9DaONa7p5/qtLagTsDWHhTDwsXeJxWQM3SrXY15GU1HRyzH9UIqYlUGoTuk0hpsMFzRq4D1CcOb+Ie8IInsgAyajRukareYQhr+RTOeBEzLjA80WOgm/GNGgJ+AVDsU49B0UKGGL/ZLT/qaIvFwTZXOwT2iS0mxPhh2gJFwYHqo8SLdWaaJVdFQKZM02FiDBMHo6JtITyqsk5RlTqrO+5/sgbuJ08ufPaJAF5PKPrqs/8TzNfBJBiD4WgTsZkiefRTLLFGCgzon4vl71A1tzPz+C5/D45zLFzS2BzP8AmvMkb+qurFzjmkiLAzaZFyLbWlYvqoIdBc1uekXgXUDWPy9Pr8wsL8TmAhxnmGt5aXiddv2UqlUDQ5Z0LjrFjlPO3xUPrILzE0aA8Tfy05yQNN7qRxUb+m9hJ+RWCrXyguN3OgDbYweotGuxWM4sEgZQSZGxMzJ9oxHxSXUtq0g7BzD8Qa8TJH+YQevT81H+LEOhrczed73iw2HVD/tJtpBMSJkEcxz1sfime48hrAnLfTca7fUrD8ZN9qFqfkEqvGY0A16m+wtcGOiyY/jFTN4JaADIsSYjmOvOIuseJoNcbEtLYBMzNxOmhIdr1QjFB4fmcCCLGCDpGhj8lvjz6zWNNBmvxh7bOJ8QkmTAkHYQJj9lWzEOkEzeADm6QIM7QbIWcXbztltHK45/orSSSRsAJmTFpjW1x8VbLoIOxLm6eHQTIEE/Ly1+C1Ucc/KRnPhEASWgnlOmv6IA+uweyAZlxMu0309NZiERw9ZxJAtF/fbT70aeiltodBanUqNIMuAN7l3rB0K14THOJggzIHvQSiCakZpJEnUAnUOv0MFdZw3BBj2ue6BbMGiToAdSAd9+Sxy9V4a357e80hBNm+nwKuWhxETBAtMETJBIj5pHs9XPT0A2sJzW80UwXaLDwWnE1i5pcZfIBMyBDXH8twtbOOUb5+9cALkmm9gmC5wIfFo9JK5X1nU8KFnSsOKji8bTdSeW1LHeCHRbmJEpm1OqNY3g7cQ5zqNcvLRGV4IMiAQHHwxYnb11WX+jeIEDuybHQjbbz5Lsh1KpanuYywu9jE2VppYkjyWtvZyvsy0TctkQdLG5/VTHZ/EDVgGupb+u61XUQ8zN4ZeRUMQmOKVr+BYhok0xETOZv63PkoP4JXa0uLLAXOZtvirWeD7kvDLyKTWTiqrMNwmtUzFjAcoEnM0Ac5k2WCrTdbxN1i0ne5HO06ciq8RC0M1NxIO6Z+KYBdwHx3jWYQTF4sNLmBxMa7eYgIe6rm8IgCdZi4+Z6dVOtj0pBzGY86McRbWBf129Fmqva4CSZknLMtHMne/XmhhcS0gEZgecC2myQrjSJtrtPLz1+pStjClOq8ey8kwNHEaaa8uiMYHtHXZma9znB7QCCTe5/X5LkXPOUk3baZBsCZEj4qVCrcEGCCd7D3Ei/ohRXI9TOrr8Wc5uUZRBg/i1mOcSsn2mp/d/E/8AcglXEPHim3mPyT/bjzd7/wB02mydSOcdQJAdUa6m0ezMiZjJAJ539D1Kk3iJc6bAF0cjedYvudkYxkVQGvBLQdD5QPghVbhJaZpEuuHFp5A2APW9uq82OaEtpnTk6V9tydPCkFznPc5rI2geKIILrOvvbQTqrqhAgB4kyZBgXMunpEdbLB9sfJzAtAkZdI3n0/ZbaeKAuJcReCAI0mbC2h9eSqSl3OZwLKlRxdlLHbDKTYCJBnSIcDuQB0SDSHFrqfhsYLiBJh0SNcsEX29yxMxwOW8eJxAzGQLwDE2023V2L4g0NMNBs0OvGgg3F9vqFDTTpInSjQ93eMnNJbDhJJBJB8JjSOfNDn+IZw9og2AAsY9kGdv0VOGxTi4kEiTJDdNINtx0RvAcHfVBLy5gJktH3rAEjkP3TeRYfaew447dIG4ioDDoILRDgZIMOBg2vMnUwshxmX2XuG8X5i0CeVl2WG7P4dhnISY3c4zNrgmPgimFoZR/KaGR+EQPgueXpCC9mLf3+ZssLfJw1F1Q+JrH6XJbJtbWLmIhXVeFVnAf/wA9bQaU6jSBGaJIy+82Xo7TAM1XF3UGNrTPUrMcUR94nyvCyfpCcX7C/Uv8Mlyzzg8MrDK7ua4ZuTTcDF/ETlgjW/VP9synKWhhGsiCfQtE+pXpeGxsGTf13W/7SypZ4B/zeIfEQnL0u4q3H9/6D8Knwzyf7S2S4Bpa7MNHD/Fc+hNgBYK2jkDoNK9hE2GnPqB0XouK7MYOpM0GAndoyevgIQyr2KoT4M7T0cfjurh6Vwz5TXx/0l9NJA7s5wlr6rHNdNOTINwD7djuPa9w5LuuP8Jp9334Bpv1OUwHHaWRHi6Qd7qrsx2YNN+fOXUgZAN8zgNiQDlEkQeqn2+pVKzW0WVTTI8ZI0J+7MGYF/h63FN6smR7PZfU0S0x01uea1GtDnZXiATLeosRJFj0WilXJ3GxE8kf7JcJfhnOdXFCuHBjWi7v7VveOILbEMzkXuYG63s7HuxT69QVBSaaz+7aGA+AQQ4BrhlH8yMuojqtfxMb528yVjlVnP4Xiz2eCk90SHHKSL6SYiYEc0VqdoHvaxnsu+8Q7+sgCM0Xn9TuuRwtHUknMYJFrHcf++q3UbkXMHXmdy2frVEnC7CLkd3wytWqYWpBJqBwAM3aw+14yfCLHfnCC4Tjz6feNMmZDJJMEH2oP3hcIh2dxDKmHqYZrwyo8jJJAktghlxrb1zLl+JYCrScQ5jszbOBi09eXU2QoKrb5KlJ9gjh+MVWvkEun2w51nDkQTdT+2a3dBNzJAM8zvPLkgTMS4GSxxEcrXO1rzCtcNL5ZuR5eXuWulNUQraPSKYaME5lBzXvc2958Ru61zIE26e7kW1GuDZMOAjcCdxrc23lBOGdoKlBxZTfAkmoHXZB6G0wYRutx6jVJNek2d303ZCOci4K1e6ocMmlnP8AFeHvJlrZaSTqNp59fkhz6j8usxrOm++g/ddpT4ayof5OKZJBhtSGEGw19kmSY/ynS6y8X4DUgl9F7TBl7RmBBFriRz+iqjKS53CcYy3jscth6riMlhNiZmbXJI2CiwBnsua86aWBBknxAX0HxTVsGWyc2gvE2jpNljLyNyZaDa+UTMG+pkfWuiZg01yG8PibwWgGNvZP+HaDb4K9uApubLQffpzFre5c+yuW2bY3uBJEaamTui+C4iCR4wbCfUwZiZQ7XBSa7l/2OAQL2i/5xvoqvs7v7se/90cYczQY16AmfMnRQgc/j+6Iys2WKMtwbVE2mR8vU6q3hvDHVX5adnHQmzdDqQF1tfg9Jw/qWydYhvXUXWZvCXUw4sY9pgZQ0zeXSSTNgIsOtxF/A8RNcHoS2OZr9k3gvbVDZaOdyCLuAnxN2zCIPVZf4IA4mSGyLQ4xbTNPMTC9BFJzqBpsJL/Zmo8NzSLgaxp0AQnAdnqji51Ss9tNzjLBINyNc1pmLw4GPceLNt02vic8sab8zkBwLCSBDp5Aub5/QWyhw7CgkZJJsc0On33XSngFVlZsw+lGosbiBmFtDc89tU+M4U+ARhy55f3bXCWhlJkAOc1pHiP4jYwTERMXknzJ/uQ4VvQEbw6hTMtosBG4aJH5rRfl+SnQwOIzFvclzgTcXbrfxeyB1J0Rvszwp1ao5lem5oa0nlfM0fmei5pRlKVfMlK+wIwnD6lZ4Y0tBdOptYFxuNLBWcV4XWwzGufkLXGBlcTsTyFl2ruDUcK+jVaT7ZBBIJvTfAaALm0m+gKycVoNxOHZRL3E0nwXFsFwAc0G5HS+/qm4xhH1y/DfYFdm+FMr0sz3PbNU025SBMMD9wbxK56riGtJE+ySDoOi67h8YZzWtzBjH5ywgOOYsLCZMag845c0Ox2Ew7zJp9NxMzJJDtfrZZOcLp/qVolSA+AAqVGMBAzOa2ddSBpN1uxFEUXPDzZjyyQ0gSNOkmNNURo5AGAMY0MMtOVriLyT4pk+vqiHEeMB85C2mTqAJv8AiI30UOePix00CaOKc9hexjqkECAL36RJ8wCi3BuHVqrgX0zTZYkkiTf2QNQfcL87KzhH2isfbho9rM1rh/oc2J8iAbyukp0g1hEmPESSTuS4wToBNuQhel0nR48q1STr39yMja7lHE8V3FLM1ghtg3QDl9eaBV+FZ6P2lznZ3DOW7e1lsNrfusnGMSXVIpk5GkyLwXFzi4yfPWDp6qdPiT3MLTUkOaALNsMwcNlPXdbHXpTuK+Y4Q2JcLxtOiHGHEuaw+w4jLmM6CZibRKpxGPOcvpuIGbO20fhJs4SLtE2BstOEw9M5s8iR4YuAZF7lKrg8lxSqVOsFrf8AjJPvC5ccsmZVjX6tfaNFEFnBMxJh1JjrXzAWjU5rFo9fVPiqWFYwU20GvDSTmOYEzrBBzZeQPwmFbiMRVILcoYDq1rcvv3PqSsJaV6vS9BpV5XfyFsKj9nDgRhQI0io8fNHaPDaVSm55Y9rqgIpy97zmAkuA1gAfCAChOHZcLpcdTqPbnY5wpwCGg5QJtltyghaZsGLZUCjZwuPrvoEirRDha4b4T92WuaQHaedr3kIYMWyq3x4dtNwsAST1DoPyhdzhaThIZN7kAH1JAUKWHwxc52Si+owSQyJnYHIQzXmZU5pSxwbtfmZywPszhq9HBuzd42qCQCYfeIHteGI5b3AVdLDYcAgGplBDnNLwZDXS0OBZMRsf2VXaCviGVnVsRQewVH+KBIgGAM7fDMdUH4w0UcQ8SYFyAfamAB039PNLHkyOqf8AJyTTTDdDCUDGV9SIF8zRe0AQPPXpzRHCcSGGM069feGS1uYjQXDhoJ0PkubwWPa9jSaYlrXEAE5RNhYDYAR59BFzcbSqhpqNn7s/eBImWnUOsNFaz5Iv1lsRqa5Oux/a2hWAz4VpAdDy4NdIgGxEc9eiv/o1gMUA6kXMJH3TmAAvJBmB+q5XEVmP8ThECZIPQGxkbco16KujnbHd5srSdSA4Hc5hHx6Lqx9RrV/M0Ts6av2CfZzKrTaBDGjyJLZl3WCgruxdeibAOAPiLfE4T01jzjRGuBdtKgOWp/MGt5D45zER0Oq6vAdoMPWkuewAaB3hcIEkg5iDb8MLbUg0o8woUKtN13NAPs3N3CTl1gb77ei2fanfhH+/913mEw+Ex7DUY2YcW3AmwBkHkQQZM6qn+hNLr/u/8EqvcaXkPSwxIlr22dfKC8xFhE211ghX4l9KkyXuucrWguyS4mxOaIbcyQIsNwEE4liSHNgkSxpy38JIuDfXe97qmpjy5uSpFRp1a8NeNtA8GF8/PNGMtLR1+N5mfG9ocRSLgKLW+MtDgIaTN5L5ubEF2TNM6XWHEdp8VnDSyt3f3obUzEdHMDW6W0WtuEw4M5HNtBDKjgC20tLXlwy9IRjh/ZOnic1anVq05e7wRTyt0cQ0RcXi61hmhN0voLVq4YGZ2grupG9ZgNqZDHkg75mNaSRfct5zus+I7TVg45aj2jMMpqOkObEOsHQHhwm8WMEE3RjtL2eZg8POV7/FlOQtBcXAlxdmaQ1sNvly301vz/C8N3oAZhKbmsM5ssQ4zJfUbl7w9HSLaK0owVsnLmUWo9z03hdLvKDKhe4zPicMpPiIBywI0H5q+lixSD8sF/s3NgC1pzD8h8UMwfE2U2UqOWBSLTLQ1ocby1jG2GpABAmRF4Czcdc59R5pgubDXW1jI25bqP2XBkzySt+e39m3xLa3GA+i2nEOpukOPiOXK4F1rDXnodkFxGILSSH5rXLSRY6gzHPRR7l2VzwSIEOIMGHW0mYN+e6F1Te1iLSuS3ke7M5TaN5xAtBuduSrfxJrXBp9RG36rCKeIzhlKmX5hIgFxsbyNhBHxXVcN7H5i2riYDsozU2SASN3GbWiQ3lqujD0bycLYzc5Mw0AajWNptkkmMou6YN50jqBuio7PBgp1KoN3Ad3Ok2BLmn0gdLrp8DhqdJuWmxrB0GvmdT5lBe0HGKbYDXhxDmgtJ8J8bSL6SPlO4C9DH6Px4lryO/v9xp7hp3dUWXy02DTQD9z8Vz+K403EU4DalNp1BEO8jeAJ98IbiuIio5pe6fJtm9B5dLInwniGHbZzbCbRrrBJnXop6nrm1pxUkVCHmAqwDgWh7h/pgj3GFqw2Ftd7DpzYbHyjYWhb24vCNcDlJgku68hA0Uf4pho9gyHTtpy6ryJZJy5aNbSKZZRhzs7ryS0NdHKb225oJxt84xtVve933QaSB4g5veGC0Cfvjb7uqI43iVF7s7actJkAGx6GHRHx6qVPtAwADuxpF5PX703la4p+H2TJ8V2cxju0uNpOc6k+uWBpIzB0WZMEaaz1WjhvaivUaHvFPQgucymQDsbyYk39V0Z47/8Yv1j16LHj8QakseylkIsR7RBgjN8NNCul9WnDZNP3DbbAFLtuSYdRoSHRMOYNr2cOa6Wh2re6mWsZTaMuaJLrwMogmZv5WQVvZ3DuJJc4AC+WAYkT0HqFPE8GpMfNBziCAczgHaR4bROhv5awql1UZbpv8wUn3LcJVqYppzP77xAhtNzgwT7Ic1oa37wvuYuV1HZrsuyiHvcZzgTsG5QBYzO1yUE4TwI3dmaxlmnI4MMA2AJA9Jt6os6uWtbQpB+QCAwgOPpvqsvxkY25LVYW2aOJ1MM0FrAXE2mTl/8h8F512g4HTql2jHnRwvacwEesW5rpcQXTBkHyNvO1kNrAhwJExYHXWOmgyjdTgzy1alS9y2/0iatbnFu4fXoMe50OyggGlJcAYkwW6RB6QULwuId7eggwBfQXBMiCZF+oXeY0tb3lRwLsrMwDZGYmRrNtQsj+z1M5JZlBjNcHUDNMA8m+46r1cXVxa9fazncNwVw6lmdINmkjfWxO8Tt/wClfW4VXbLqRaHEyQXRuT4QRoZ3KMU+CdzTGWYeA7R29yRAgaAG3NUUMWWmHtkAuu0yDBAEyBA8uflOryVbiDiktwN/EQDDmZXDV8NALgNSRqdPcqm1Sagc15cZGcZI6DQ+uy6L7NQcS6pTAcL3AgDcwRGbS/y1QaqKTXltEGD4iZuc1z0ItEfkt45E90S6QZwfHa1BjSyrLWEnK+MpkEGOQE2E7Cyj/TLE/wB4feuQz1CXB0tO7XDKQCNYJ12jmQtfet/CP+P6Kt48sEzsGVCT7LPRwb/+vyVzaROjHO8ntd74aVko4Z79Gn1/Pf3ovh+GUxrned5OUf7WGSP9YXi+FJ7tfrX0NY2zNSxGUw1rQ7aRndPQQAP9srv+BU6lPDOL5zEucCdYDRz8iFzHfgAjbTKAALHpr5klV4jiGYC5MeEA6CRpG4WE5RjJett7v6N4xrk6Tj1PPhKTn2JyEnecjp0FpnaPRcsarQcrBb335nnMrfVxLhhWmQRnGYEkguAtlYT4LE2HLRB8ViWvy92zK8XcJsRFjljUHkRr6rOXUTm6jx5jdRLqLntzVKb6JgEOpuMv0IszU8xHLzCbCkhpIkkPLM4cWuaRY2F9Y8U3JgdWwmGrVTNFhdOuazCMwMF1oJAiW+ISYm8n+GdkqbCXVCbkksa5+W/Mky7lNiujH0UskdlXxI1UCcFgqlWQGON/aExtq42m5kSiuE7HN1qvv+FkQPUi/oAunpw0BrWgAaACB7lXisWymJe4DkNz0A1K7cHo2Md5b/IiUkV4XAU6YIp02tnU7+8qOOx1Ki3PUe1rZAlxAudABuVznFe0z3se2l4MzHBlQgyCRAc2BBg7X012XL8QNTElneVxNMjLykbkEXNrmV0ZOpx4/VjX0M5S22DXHe0TqjsrHuY1urcoBMj7zXXiDN42NkDrhtQeIlx1dMhxPMxb6tsrMXQq1TTc6rTOT8IgkEze5nlfz5q3uGyLnrAkX8zdeZmzSlLeV/tQ0pW9iVGuI526krQH9PryVTaLBcZh6foUxaNJN+l/mvPnDfZo11tLci9jzcEfmPqFlrMPiD+8iPDlGYEkGc2UFwGmx9ERZHInzP5C/wAVBriDJaPjPzVQel3sQ4sy4HCMEhubK2PE7MMxPLMAT5wP1K4HhTaoM1KTBMQ98HnYRp6qoVuTR8FYHD8MJ+LHXqav3f2PS6pEq/Cyw5GvY62rHEjyvv71GnwypUMAFx6SY2GlgNtVB9SAXZ4gTfp1/ZS4TxoyS2oGEHLOzrAtnMIvJAHQ6JxSlK2nV9vvn4mbpbdwg3gVcD+rmbX7vQi4iVidhnMJaW5TyjL8EUPHK5IYHnMTEBjJmYi+hU3cGxLiXuEk65qgn3X/APstcnTQyr/zqTrm6/juP4sEtpu5adSqquBqNOcF7TOoLhfzn4K3GUXBxY+QW2LdALdPmoVK7zOZxIm4s0aRoI/ebzK44x02ndmmmwTxgYp12VJcD9+ZMaCSD8QquGuxLpbWpQBeQWl0XsDGl9EcNbmNPrUXURiGtMwfh66BdEMq0pUv0M3ia3sy0jScC17nAmcnhBb7JsQNpj3ofUNRrzMxBOYQQOk6N219UQ47WLnNfle6Jl2VrWt2AAb7Q8whtHFsJa8mwINtJ8Td9WnruF048dp37xxqSqy9uMJAhxgGNXR1gT6oVjKDXtJeSDmdBY4TeTdo8Wm99DdGPs7HOm33jrcabjSx66aIfjOH1YmmQ+LOa4+L99+XSF04NaWlPYGpHNValfKTT8VOfFnPhgiQ220x55haCs2CoVDUzmmQwuAOQd2LGwZAnSRETc7q+tjwX906kRfLUEudBm9iZERoo1MQ6m9po1HVKZgEkQWmbgx7II0nkeS9SGqnsjmfIN4i4Z9SZuLmYFgM0wTr0hL+JDm//cEXxlJj2WLS2R/LD2585AvEucCBrpMbWC5r7WOfw/ZatFSdPY9fp4wzcQ365+iWLqNZ4zMTBiTExJt5jkh7C6RHSLa8wOfxR3hvBa9QR3eVvNxy28oLl8u8WXK73Z16uyHfjc0TdrfCNoAkQNj+d+aytwdR5HdAu6tB3OjrWjrblquk4b2PYwDvKjn629ltzJ3ki9riF0NGmym0NaBA0G3/ALXRj9Gu92O21ucng+yr3eKqQw75fE4jkZsD70bwnAcPTH9W15iJeA8n1It5BE5JUXABeph6THDdIhyIt5AKZECT9em6HcR4uyjcm8WaLk9Y28zAXO4zjtSqIEsHTxT6iCE8nVY8eydsNLfIQ4z2iqZXDDM8QkBz5An/AC/r7lx1fiuLqBratMuIINbLlaagaZaM5cTBOrYFiRMGxBzyb5jbnPWw5Ksu5D5fXVceTq5zfKX37heF5Ng/EYjE1nsLxlLM4cS4eMFwyktZYPgXMnSyuxbbCBadtlpcDrb5/mqXPG7NdY+r/XpwZpKc7tD06d+SnDOjnH1st1Mzp+SprNaYDT6O/Ua+7ZKhSIEkgXiZH1ssXgk96/k0izWXhVlx0ifiqq9UMGa7o/DyvI6281KtixlD2Plrw23suBM5xDHH2TkB09oclcemtXd/D/QcqJ3/AAnpbz5eR9yYOm36rNh8U0+y+9jZ3qJjY+quNcnXKfPX3g/IXk3S8GL2ToLtGhmx1UwyfrT1WRmIgQG6cxN5625fHnabsQSIcYGxmG2/EOXlzTjgXf7/ADC3XBXj8C2oC0vsQR4Z3BBG3MhLh+CbTaW5i4EkyWtJGYCQ1xHhFhYKNRxB+o9/oq2YjWfn9fFXGU16tUhJd2EnYqYhogcxJ9+3otbOK1YjvH+Qe/8A7kFOIJ5DfSeSpqY0AwXtE9QD7lcItNvUFRXIQGMpPc7LUGYe1lcCQYFyPVLI512va7br+++krnS+g59RwDc7mgEgtGYEW8O55GLrXw4spDK0EReZzEnmXc5m6U8cO9kbBI59SBHPn9XUH1Pfv1UsRXluZtj96NBOh03v62QyqSTOb4x8FlPGk6XBnkzRjstw/hmtrN7p9U0xvd0GBaQw3sLbeH3h8Uyk15AJcLS65mNwHGdVCnVc0atJ2nntPTY9CVKpxnCsgOpPDmiCS4uDnctRBjb6PRic1Uoq+z+oY8qkRw+ODXFjoOUQXXEg7jpbWVfVphzQ4GDEmNPORN/03VOJxNB1hlbUYDzImJLTffw+8bxFOD4i0tqM8JLSWuAJMRINwYlbqalu47G1p7M01uFU6zQKjc7gBqYeB/heLgSDY2K5XjHZR1Jwq0Q57CYc1xGYSBBMQC2fdG+q7XFMiXN5ExP/AC00+vPFjMQS0WzNkB4BDgLezIF9R1suqOZY1UUTkhCuAbw9oq0pbSpOqsGaXsLpAINnhw9LfO1n2Srzpf8AU/8ANY8zqT87JyVHNLmu0aNSRydZtnA/JFvtI/Ez3hdUMiauzOORVUj0rh+ApUpFNgb5anzOp9UQZZMkn2NXyLMVKkN0kklyHYo4hWc2i94MODSQbaxyXB1OK17/AM19769Bp+H0TpKPSLrp3XuMYPcpJJMkyZF/erg0ZZ+tkkl89HudiKiwXVIcfmnSWLM3yiVQx7/0VTikkpQdyFWwkawnLzJTJLT/AJJftFh1HULLhK7mVRTa4hhJdlmRmDXw4A6GwuNfVJJdHRt6/vzLDXG8M2pTxLnSTSqZaZkjKDksINly+ExLyQJ1a0mw3a2fmUkl3dSloswye0X47EvawEGDJ2HJYaGNqOc5peYyONraNJGiSSxxJNbkNuzLicfVbULQ8xlJjXbmb7BR+0vNPvM7swzxcgeE0QPDp/aO236BMku1wjfBTR0HCqYcaJd4szWEg3BzYh9M2NvZaB6TrdaadJv8Q7jK3uiypLIEHK4xO59ka6xdJJEUlJUa1si/KK9E1KwD3mlWMuEx3bAWR+GCTpE7ygGHYM1RuzAzLcyJaSb6nTdJJYZ/YbIzpaUa8CZdB0III9B+g9yWEGbKCAQQJEeaSS5JewvzODHvKNjEwT0APwTPw7apAqDMAIAMxBO40Otp02TJLTpW/ERrH2gbTwrBUdDRYwJuYzAanoivafCMZTFVjcr+9azMCZLS1oIPPXdJJOU5eLFWa9P/ANffmbKjiaZufZmxI26IO077xvf7wG/RJJa/9M2y8oVOoRLZMBwAE7aR5Kru2f3dP/ps/RJJa4O5lVn/2Q=="
+        alt="Sơn Động"
       />
       <div class="overlay"></div>
       <div class="container">
         <div class="grid-2">
           <div class="reveal">
-            <span class="section-num">01. VỊ TRÍ ĐẮC ĐỊA</span>
-            <h2 style="font-size: 45px; margin-bottom: 25px">
-              Cánh cổng phía Tây của thánh địa Yên Tử
+            <span class="section-num">01. VỊ TRÍ CHIẾN LƯỢC</span>
+            <h2 style="font-size: 40px; margin-bottom: 20px">
+              Tâm điểm vùng Đông Bắc
             </h2>
-            <p style="font-size: 18px; line-height: 1.8; opacity: 0.9">
-              Tọa lạc tại huyện Sơn Động, tỉnh Bắc Giang, Tây Yên Tử không chỉ
-              là một danh thắng, mà còn là hành trình đi tìm sự bình yên trong
-              tâm hồn giữa thiên nhiên hoang sơ.
+            <p style="font-size: 17px; line-height: 1.8; opacity: 0.8">
+              Tọa lạc trên sườn Tây dãy núi Yên Tử hùng vĩ, thuộc huyện Sơn
+              Động. Đây là vùng đất "tựa sơn hướng thủy", nơi hội tụ linh khí
+              của trời đất Bắc Giang.
             </p>
-            <div style="margin-top: 30px">
-              <p>
+            <div style="margin-top: 25px">
+              <p style="margin-bottom: 10px">
                 <i
-                  class="fa-solid fa-location-arrow"
-                  style="color: var(--secondary)"
+                  class="fa-solid fa-mountain-sun"
+                  style="color: var(--secondary); margin-right: 10px"
                 ></i>
-                Cách Hà Nội 120km
+                Độ cao đỉnh núi: 1.068m
               </p>
               <p>
                 <i
-                  class="fa-solid fa-cloud"
-                  style="color: var(--secondary)"
+                  class="fa-solid fa-map-pin"
+                  style="color: var(--secondary); margin-right: 10px"
                 ></i>
-                Độ cao trung bình 1.000m so với mực nước biển
+                Diện tích khu bảo tồn: 13.000 ha
               </p>
             </div>
           </div>
-          <div
-            class="glass-box reveal"
-            style="padding: 20px; border-radius: 20px"
-          >
+          <div class="glass-box reveal">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/c/c9/T%C3%A2y_Y%C3%AAn_T%E1%BB%AD.jpg"
               style="width: 100%; border-radius: 15px"
@@ -334,121 +317,231 @@
       </div>
     </section>
 
-    <!-- Slide 3: Values -->
+    <!-- Slide 3: History -->
     <section class="slide">
       <img
         class="bg-img"
-        src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen-tu-8.jpg"
-        alt="Chùa cổ"
+        src="data:image/jpeg;base64,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"
+        alt="Lịch sử"
       />
       <div class="overlay"></div>
       <div class="container">
-        <span class="section-num">02. GIÁ TRỊ CỐT LÕI</span>
-        <h2 style="font-size: 45px; text-align: center; margin-bottom: 10px">
-          Ba trụ cột di sản
+        <span class="section-num">02. DÒNG CHẢY LỊCH SỬ</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Con đường hoằng dương Phật pháp
         </h2>
-        <div class="card-grid">
-          <!-- Đã đồng bộ tốc độ xuất hiện cho cả 3 mục -->
-          <div class="card reveal">
-            <i class="fa-solid fa-dharmachakra"></i>
-            <h3>Phật Giáo Trúc Lâm</h3>
-            <p>Con đường tu hành của Phật Hoàng Trần Nhân Tông.</p>
+        <div class="timeline reveal">
+          <div class="timeline-item">
+            <h4 style="color: var(--secondary)">Thế kỷ XIII</h4>
+            <p>
+              Phật hoàng Trần Nhân Tông từ bỏ ngai vàng, chọn Yên Tử làm nơi tu
+              hành, khai sinh Thiền phái Trúc Lâm.
+            </p>
           </div>
-          <div class="card reveal">
-            <i class="fa-solid fa-mountain"></i>
-            <h3>Rừng Nguyên Sinh</h3>
-            <p>Hệ sinh thái đặc hữu với hàng ngàn loài thực vật quý hiếm.</p>
+          <div class="timeline-item">
+            <h4 style="color: var(--secondary)">Thời Lê - Nguyễn</h4>
+            <p>
+              Hệ thống chùa chiền phía Tây được củng cố, trở thành lá chắn tâm
+              linh quan trọng cho kinh đô.
+            </p>
           </div>
-          <div class="card reveal">
-            <i class="fa-solid fa-landmark"></i>
-            <h3>Kiến Trúc Lý - Trần</h3>
-            <p>Tái hiện vẻ đẹp lộng lẫy của các vương triều vàng son.</p>
+          <div class="timeline-item">
+            <h4 style="color: var(--secondary)">Hiện nay</h4>
+            <p>
+              Được phục dựng quy mô lớn, trở thành trung tâm du lịch tâm linh
+              trọng điểm của tỉnh Bắc Giang.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 4: Great Wall of Vietnam -->
+    <!-- Slide 4: Values -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen-tu-8.jpg"
+        alt="Di sản"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">03. GIÁ TRỊ DI SẢN</span>
+        <h2 style="font-size: 40px; text-align: center; margin-bottom: 10px">
+          Tuyệt tác thiên nhiên & nhân tạo
+        </h2>
+        <div class="card-grid">
+          <div class="card reveal">
+            <i class="fa-solid fa-om"></i>
+            <h3>Tâm Linh Trúc Lâm</h3>
+            <p>Nơi lưu giữ hồn cốt của dòng thiền thuần Việt đầu tiên.</p>
+          </div>
+          <div class="card reveal">
+            <i class="fa-solid fa-tree"></i>
+            <h3>Đa dạng Sinh học</h3>
+            <p>Khu rừng nguyên sinh với hàng trăm loài kỳ hoa dị thảo.</p>
+          </div>
+          <div class="card reveal">
+            <i class="fa-solid fa-synagogue"></i>
+            <h3>Nghệ thuật Kiến trúc</h3>
+            <p>Những mái chùa cong vút mang đậm dấu ấn vương triều Trần.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: The Pagodas -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1920"
+        alt="Các cấp độ chùa"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">04. HÀNH TRÌNH KHÁM PHÁ</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Ba tầng mây - Ba bậc thiền
+        </h2>
+        <div class="grid-2 reveal">
+          <div class="glass-box">
+            <p style="margin-bottom: 15px">
+              <strong>Chùa Hạ:</strong> Khu vực quảng trường, nơi diễn ra các lễ
+              hội lớn và các nghi thức văn hóa.
+            </p>
+            <p style="margin-bottom: 15px">
+              <strong>Chùa Trung:</strong> Nằm giữa lưng chừng núi, không gian
+              tĩnh lặng để nghỉ chân và thiền định.
+            </p>
+            <p>
+              <strong>Chùa Thượng:</strong> Điểm cao nhất, nơi bạn có thể chạm
+              tay vào mây trời và nhìn ngắm toàn cảnh Sơn Động.
+            </p>
+          </div>
+          <img
+            src="https://zoomtravel.vn/upload/images/tay-yen-tu-3.jpg"
+            style="
+              border-radius: 20px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            "
+            alt="Chùa Thượng"
+            width="75%"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Highlight -->
     <section class="slide">
       <img
         class="bg-img"
         src="https://media.mybacgiang.vn/resources/portal//Images/BGG/admin.dulich/tay_yen_tu/9_982695817.jpg"
-        alt="Đường đá núi"
+        alt="Vạn lý trường thành"
       />
       <div class="overlay"></div>
       <div class="container">
         <div class="grid-2">
           <div class="glass-box reveal">
-            <h2 style="color: var(--secondary); font-size: 38px">
+            <h2 style="color: var(--secondary); font-size: 35px">
               "Vạn Lý Trường Thành" phiên bản Việt
             </h2>
-            <p style="margin-top: 20px; font-size: 18px; line-height: 1.6">
-              Những bậc thang đá dài tít tắp men theo sườn núi tạo nên một khung
-              cảnh hùng vĩ, là điểm thách thức sức bền và cũng là nơi cho ra đời
-              những bức ảnh "triệu view".
+            <p style="margin-top: 15px; font-size: 17px; line-height: 1.6">
+              Những bậc thang đá uốn lượn hùng vĩ giữa mây ngàn, tạo nên một
+              "tọa độ" check-in đẳng cấp, khẳng định sức sống mãnh liệt của con
+              người trước thiên nhiên.
             </p>
           </div>
           <div class="reveal" style="text-align: right">
             <h1
-              style="
-                font-size: 120px;
-                opacity: 0.2;
-                color: var(--secondary);
-                line-height: 1;
-              "
+              style="font-size: 100px; opacity: 0.15; color: var(--secondary)"
             >
-              MAJESTIC
+              GRAND VIEW
             </h1>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 5: Experiences -->
+    <!-- Slide 7: Best Time -->
     <section class="slide">
       <img
         class="bg-img"
-        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1920"
-        alt="Trải nghiệm"
+        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920"
+        alt="Thời điểm đẹp"
       />
       <div class="overlay"></div>
       <div class="container">
-        <span class="section-num">03. TRẢI NGHIỆM ĐÁNG GIÁ</span>
+        <span class="section-num">05. THỜI ĐIỂM VÀNG</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Mùa nào Tây Yên Tử đẹp nhất?
+        </h2>
+        <div class="grid-2 reveal">
+          <div class="card">
+            <h4 style="color: var(--secondary); margin-bottom: 10px">
+              Mùa Xuân (Tháng 1 - 3)
+            </h4>
+            <p>
+              Mùa lễ hội, sương mù huyền ảo, lý tưởng cho những ai muốn cầu may
+              mắn và bình an đầu năm.
+            </p>
+          </div>
+          <div class="card">
+            <h4 style="color: var(--secondary); margin-bottom: 10px">
+              Mùa Hè (Tháng 5 - 8)
+            </h4>
+            <p>
+              Khí hậu mát mẻ như "Đà Lạt của Bắc Giang", là nơi trốn nóng tuyệt
+              vời để trekking và săn mây.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Experiences -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://tayyentu.vn/public/upload/C%C3%A1p%20treo/10.jpg"
+        alt="Cáp treo"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">06. DỊCH VỤ & TRẢI NGHIỆM</span>
         <div class="grid-2" style="margin-top: 20px">
           <div class="reveal">
             <div
               style="
                 background: rgba(212, 175, 55, 0.1);
-                padding: 25px;
+                padding: 20px;
                 border-radius: 15px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
                 border-left: 4px solid var(--secondary);
               "
             >
-              <h4 style="font-size: 22px; color: var(--secondary)">
-                <i class="fa-solid fa-cable-car"></i> Cáp treo xuyên mây
+              <h4 style="color: var(--secondary)">
+                <i class="fa-solid fa-cable-car"></i> Cáp treo hiện đại
               </h4>
-              <p>Ngắm nhìn toàn cảnh thảm rừng xanh mướt từ trên cao.</p>
+              <p>Chỉ 10 phút để bay qua thảm rừng xanh mướt.</p>
             </div>
             <div
               style="
                 background: rgba(212, 175, 55, 0.1);
-                padding: 25px;
+                padding: 20px;
                 border-radius: 15px;
                 border-left: 4px solid var(--secondary);
               "
             >
-              <h4 style="font-size: 22px; color: var(--secondary)">
-                <i class="fa-solid fa-camera"></i> Săn mây Cổng Trời
+              <h4 style="color: var(--secondary)">
+                <i class="fa-solid fa-camera-retro"></i> Săn mây Cổng Trời
               </h4>
-              <p>Chạm tay vào làn sương mờ ảo lúc bình minh.</p>
+              <p>Khoảnh khắc bình minh mờ ảo đẹp như phim điện ảnh.</p>
             </div>
           </div>
-          <div class="reveal">
+          <div class="reveal glass-box" style="padding: 20px">
             <table class="custom-table">
               <tr>
                 <th>Dịch vụ</th>
-                <th>Giá vé (Tham khảo)</th>
+                <th>Tham khảo</th>
               </tr>
               <tr>
                 <td>Cáp treo khứ hồi</td>
@@ -459,8 +552,8 @@
                 <td>20.000đ</td>
               </tr>
               <tr>
-                <td>Combo Ăn trưa</td>
-                <td>~150.000đ</td>
+                <td>Cơm chay/Mặn</td>
+                <td>150.000đ</td>
               </tr>
             </table>
           </div>
@@ -468,80 +561,128 @@
       </div>
     </section>
 
-    <!-- Slide 6: Quote & Message -->
+    <!-- Slide 9: Student Mission -->
+    <section class="slide" style="background: #0d1b15">
+      <div
+        class="overlay"
+        style="
+          background: radial-gradient(
+            circle,
+            rgba(27, 67, 50, 0.6) 0%,
+            #050f0c 100%
+          );
+        "
+      ></div>
+      <div class="container" style="text-align: center">
+        <span class="section-num" style="display: inline-block"
+          >07. SỨ MỆNH GEN Z</span
+        >
+        <h2
+          style="font-size: 50px; margin-bottom: 30px; color: var(--secondary)"
+        >
+          Người trẻ Bắc Giang - Đại sứ du lịch
+        </h2>
+        <div class="card-grid reveal">
+          <div class="card">
+            <i class="fa-solid fa-share-nodes"></i>
+            <p>
+              Lan tỏa hình ảnh quê hương qua mạng xã hội (TikTok, FB, Insta).
+            </p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <p>Du lịch văn minh: Không xả rác, tôn trọng văn hóa tâm linh.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <p>Học tập tốt để mai sau xây dựng quê hương giàu đẹp hơn.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: Quote -->
     <section class="slide">
       <img
         class="bg-img"
         src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920"
-        alt="Hoàng hôn"
+        alt="Ending"
       />
       <div class="overlay"></div>
       <div class="container" style="text-align: center">
         <div class="reveal">
           <blockquote>
             "Bắc Giang không chỉ có vải thiều. Bắc Giang còn có một Tây Yên Tử
-            hùng vĩ và linh thiêng, đang chờ bước chân tuổi trẻ của chúng mình
-            đến khám phá."
+            hùng vĩ, chờ bước chân tuổi trẻ của chúng mình đến để viết tiếp
+            những trang sử mới."
           </blockquote>
-          <div style="margin-top: 50px">
-            <p style="font-size: 20px; letter-spacing: 5px">
-              #GENZ #EXPLORE #BACGIANG
+          <div style="margin-top: 40px">
+            <p
+              style="
+                font-size: 20px;
+                letter-spacing: 5px;
+                color: var(--secondary);
+              "
+            >
+              #YENDUNG3 #12A2 #GENZ_TRAVEL
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 7: Contact -->
+    <!-- Slide 11: Final Info -->
     <section class="slide" style="background: #1b4332">
       <div class="container" style="text-align: center">
-        <h2 class="reveal" style="font-size: 70px; color: var(--secondary)">
-          HÃY ĐẾN VÀ CẢM NHẬN!
+        <h2
+          class="reveal"
+          style="font-size: 60px; color: var(--secondary); margin-bottom: 10px"
+        >
+          HẸN GẶP TẠI TÂY YÊN TỬ!
         </h2>
         <p
           class="reveal"
-          style="margin-top: 20px; font-size: 20px; opacity: 0.8"
-        >
-          Cảm ơn thầy cô và các bạn đã lắng nghe bài thuyết trình.
-        </p>
-        <div
-          class="reveal"
           style="
-            margin-top: 60px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            font-weight: 600;
           "
         >
-          <div class="card" style="width: 200px">
+          Tập thể lớp 12A2 - Trường THPT Yên Dũng số 3
+        </p>
+
+        <div
+          class="reveal"
+          style="display: flex; justify-content: center; gap: 40px"
+        >
+          <div class="card" style="width: 220px">
             <i class="fa-brands fa-facebook"></i>
-            <p>Fanpage</p>
+            <p>Fanpage Du lịch</p>
           </div>
-          <div class="card" style="width: 200px">
+          <div class="card" style="width: 220px">
             <i class="fa-brands fa-tiktok"></i>
-            <p>TikTok</p>
+            <p>TikTok Cá nhân</p>
           </div>
         </div>
+        <p
+          class="reveal"
+          style="margin-top: 40px; font-size: 14px; opacity: 0.6"
+        >
+          Cảm ơn thầy cô và các bạn đã lắng nghe!
+        </p>
       </div>
     </section>
 
     <script>
-      // Reveal animation on scroll with debouncing for performance
-      const observerOptions = {
-        threshold: 0.4,
-      };
-
+      const observerOptions = { threshold: 0.4 };
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
-          } else {
-            // Tùy chọn: Xóa active khi trượt qua để tiết kiệm tài nguyên
-            // entry.target.classList.remove('active');
           }
         });
       }, observerOptions);
-
       document.querySelectorAll(".slide").forEach((slide) => {
         observer.observe(slide);
       });
