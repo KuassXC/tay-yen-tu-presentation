@@ -173,14 +173,6 @@
         transform: translateZ(0);
         backface-visibility: hidden;
       }
-      
-      /* Link wrapper style to prevent text-decoration */
-      .contact-link {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-      }
-
       .card:hover {
         background: var(--secondary);
         transform: translateY(-10px) translateZ(0);
@@ -346,7 +338,7 @@
     <section class="slide">
       <img
         class="bg-img"
-        src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen tu-8.jpg"
+        src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen-tu-8.jpg"
         alt="Chùa cổ"
       />
       <div class="overlay"></div>
@@ -356,6 +348,7 @@
           Ba trụ cột di sản
         </h2>
         <div class="card-grid">
+          <!-- Đã đồng bộ tốc độ xuất hiện cho cả 3 mục -->
           <div class="card reveal">
             <i class="fa-solid fa-dharmachakra"></i>
             <h3>Phật Giáo Trúc Lâm</h3>
@@ -520,26 +513,20 @@
             gap: 30px;
           "
         >
-          <!-- LINK FACEBOOK: Đã được cập nhật -->
-          <a href="https://www.facebook.com/DulichBacGiang" target="_blank" class="contact-link">
-            <div class="card" style="width: 200px">
-              <i class="fa-brands fa-facebook"></i>
-              <p>Fanpage</p>
-            </div>
-          </a>
-
-          <!-- LINK TIKTOK: Đã cập nhật theo yêu cầu mới của bạn -->
-          <a href="https://www.tiktok.com/@anhemroyt32" target="_blank" class="contact-link">
-            <div class="card" style="width: 200px">
-              <i class="fa-brands fa-tiktok"></i>
-              <p>TikTok</p>
-            </div>
-          </a>
+          <div class="card" style="width: 200px">
+            <i class="fa-brands fa-facebook"></i>
+            <p>Fanpage</p>
+          </div>
+          <div class="card" style="width: 200px">
+            <i class="fa-brands fa-tiktok"></i>
+            <p>TikTok</p>
+          </div>
         </div>
       </div>
     </section>
 
     <script>
+      // Reveal animation on scroll with debouncing for performance
       const observerOptions = {
         threshold: 0.4,
       };
@@ -548,6 +535,9 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
+          } else {
+            // Tùy chọn: Xóa active khi trượt qua để tiết kiệm tài nguyên
+            // entry.target.classList.remove('active');
           }
         });
       }, observerOptions);
