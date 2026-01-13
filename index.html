@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tây Yên Tử - Tuyệt tác Bắc Giang</title>
+    <title>Tây Yên Tử - Niềm tự hào Bắc Giang</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,8 +24,12 @@
         --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
       }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
       body {
         background-color: #050f0c;
         font-family: "Montserrat", sans-serif;
@@ -58,294 +62,701 @@
         position: relative;
       }
 
-      h1, h2, h3 { font-family: "Playfair Display", serif; }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", serif;
+      }
 
       .bg-img {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         z-index: 1;
-        filter: brightness(0.5);
-        transition: transform 12s var(--ease-smooth);
+        filter: brightness(0.45);
+        transition: transform 15s linear;
         will-change: transform;
-        backface-visibility: hidden;
-        transform: scale(1.02);
       }
-      .slide:hover .bg-img { transform: scale(1.1); }
+      .active .bg-img {
+        transform: scale(1.15);
+      }
 
       .overlay {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85));
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent 30%,
+          rgba(0, 0, 0, 0.9)
+        );
         z-index: 2;
         pointer-events: none;
       }
 
       .reveal {
         opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s var(--ease-smooth), transform 0.8s var(--ease-smooth);
+        transform: translateY(40px);
+        transition: opacity 1s var(--ease-smooth),
+          transform 1s var(--ease-smooth);
       }
-      .active .reveal { opacity: 1; transform: translateY(0); }
+      .active .reveal {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-      .hero-title { font-size: 80px; line-height: 1.1; margin-bottom: 20px; }
-      .hero-sub { font-size: 18px; text-transform: uppercase; letter-spacing: 8px; color: var(--secondary); margin-bottom: 15px; }
-      
+      .hero-title {
+        font-size: clamp(50px, 8vw, 90px);
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .hero-sub {
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        color: var(--secondary);
+        margin-bottom: 15px;
+      }
+
       .glass-box {
         background: var(--glass);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         padding: 40px;
         border-radius: 30px;
       }
 
-      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
 
-      .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
       .card {
-        background: rgba(255,255,255,0.05);
-        padding: 25px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
         border-radius: 20px;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         text-align: center;
         transition: 0.4s var(--ease-smooth);
       }
-      .card:hover { background: var(--secondary); color: var(--primary); transform: translateY(-10px); }
-      .card i { font-size: 35px; margin-bottom: 15px; color: var(--secondary); }
-      .card:hover i { color: var(--primary); }
+      .card:hover {
+        background: var(--secondary);
+        color: var(--primary);
+        transform: translateY(-12px);
+      }
+      .card i {
+        font-size: 35px;
+        margin-bottom: 15px;
+        color: var(--secondary);
+      }
+      .card:hover i {
+        color: var(--primary);
+      }
 
-      .section-num { font-size: 14px; font-weight: 700; color: var(--secondary); border-left: 3px solid var(--secondary); padding-left: 15px; margin-bottom: 15px; display: block; }
+      .section-num {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--secondary);
+        border-left: 3px solid var(--secondary);
+        padding-left: 15px;
+        margin-bottom: 15px;
+        display: block;
+      }
 
-      blockquote { font-size: 36px; line-height: 1.4; font-family: "Playfair Display"; font-style: italic; position: relative; max-width: 900px; margin: 0 auto; }
-      
-      .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10; animation: bounce 2s infinite; opacity: 0.7; }
-      @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);} 40% {transform: translateY(-10px) translateX(-50%);} }
+      .scroll-hint {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        animation: bounce 2s infinite;
+        opacity: 0.6;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0) translateX(-50%);
+        }
+        50% {
+          transform: translateY(-10px) translateX(-50%);
+        }
+      }
 
-      .timeline { border-left: 2px solid var(--secondary); padding-left: 30px; margin-left: 20px; }
-      .timeline-item { margin-bottom: 30px; position: relative; }
-      .timeline-item::before { content: ''; position: absolute; left: -41px; top: 5px; width: 20px; height: 20px; background: var(--secondary); border-radius: 50%; }
+      .timeline {
+        border-left: 2px solid var(--secondary);
+        padding-left: 30px;
+      }
+      .timeline-item {
+        margin-bottom: 25px;
+        position: relative;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -41px;
+        top: 6px;
+        width: 18px;
+        height: 18px;
+        background: var(--secondary);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--secondary);
+      }
 
-      .custom-table { width: 100%; border-collapse: collapse; }
-      .custom-table th { text-align: left; padding: 12px; border-bottom: 2px solid var(--secondary); color: var(--secondary); }
-      .custom-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .custom-table th {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 2px solid var(--secondary);
+        color: var(--secondary);
+      }
+      .custom-table td {
+        padding: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      ul.feature-list {
+        list-style: none;
+      }
+      ul.feature-list li {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      ul.feature-list li i {
+        color: var(--secondary);
+        margin-top: 5px;
+      }
     </style>
   </head>
   <body>
-
     <!-- Slide 1: Welcome -->
-    <section class="slide active">
-      <img class="bg-img" src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1920" alt="Toàn cảnh núi non">
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1920"
+        alt="Landscape"
+      />
       <div class="overlay"></div>
       <div class="container" style="text-align: center">
         <p class="hero-sub reveal">Di sản ngàn năm - Bắc Giang</p>
         <h1 class="hero-title reveal">TÂY YÊN TỬ</h1>
-        <p class="reveal" style="font-size: 22px; font-weight: 300; opacity: 0.9;">Bản giao hưởng giữa Mây ngàn và Đất Phật</p>
+        <p
+          class="reveal"
+          style="font-size: 24px; font-weight: 300; opacity: 0.9"
+        >
+          Hành trình về miền mây trắng của Gen Z Yên Dũng 3
+        </p>
       </div>
       <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i></div>
     </section>
 
-    <!-- Slide 2: Location -->
+    <!-- Slide 2: Overview -->
     <section class="slide">
-      <img class="bg-img" src="https://images.unsplash.com/photo-1596395819057-e37f55a8516d?q=80&w=1920" alt="Rừng núi Sơn Động">
+      <img
+        class="bg-img"
+        src="https://cdn.xanhsm.com/2025/02/aeeb26b9-chua-tay-yen-tu-3.jpg"
+        alt="Overview"
+      />
       <div class="overlay"></div>
       <div class="container">
         <div class="grid-2">
           <div class="reveal">
-            <span class="section-num">01. VỊ TRÍ CHIẾN LƯỢC</span>
-            <h2 style="font-size: 40px; margin-bottom: 20px">Tâm điểm vùng Đông Bắc</h2>
-            <p style="font-size: 17px; line-height: 1.8; opacity: 0.8">Tọa lạc trên sườn Tây dãy núi Yên Tử hùng vĩ, thuộc huyện Sơn Động. Đây là vùng đất "tựa sơn hướng thủy", nơi hội tụ linh khí của trời đất Bắc Giang.</p>
-            <div style="margin-top: 25px">
-                <p style="margin-bottom: 10px;"><i class="fa-solid fa-mountain-sun" style="color: var(--secondary); margin-right: 10px;"></i> Độ cao đỉnh núi: 1.068m</p>
-                <p><i class="fa-solid fa-map-pin" style="color: var(--secondary); margin-right: 10px;"></i> Diện tích khu bảo tồn: 13.000 ha</p>
-            </div>
+            <span class="section-num">01. TỔNG QUAN</span>
+            <h2 style="font-size: 45px; margin-bottom: 25px">
+              Viên ngọc quý vùng Đông Bắc
+            </h2>
+            <p style="font-size: 18px; line-height: 1.8; opacity: 0.85">
+              Tọa lạc tại huyện Sơn Động, Tây Yên Tử là sự kết hợp hoàn hảo giữa
+              du lịch tâm linh, sinh thái và lịch sử. Đây là "địa chỉ đỏ" để
+              người trẻ tìm về giá trị truyền thống.
+            </p>
           </div>
           <div class="glass-box reveal">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/T%C3%A2y_Y%C3%AAn_T%E1%BB%AD.jpg" style="width: 100%; border-radius: 15px" alt="Cảnh quan Tây Yên Tử">
+            <ul class="feature-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Địa điểm: Huyện Sơn Động, tỉnh Bắc Giang.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-mountain"></i>
+                <span>Đỉnh cao nhất: 1.068m so với mực nước biển.</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-cloud"></i>
+                <span>Đặc sản: Biển mây bồng bềnh quanh năm.</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 3: History -->
+    <!-- Slide 3: History & Buddhism -->
     <section class="slide">
-      <img class="bg-img" src="https://images.unsplash.com/photo-1598966730333-bcd1ca25070d?q=80&w=1920" alt="Kiến trúc cổ">
+      <img
+        class="bg-img"
+        src="https://cdn.xanhsm.com/2025/02/04b9e6cf-chua-tay-yen-tu-4.jpg"
+        alt="History"
+      />
       <div class="overlay"></div>
       <div class="container">
-        <span class="section-num">02. DÒNG CHẢY LỊCH SỬ</span>
-        <h2 style="font-size: 40px; margin-bottom: 30px">Con đường hoằng dương Phật pháp</h2>
+        <span class="section-num">02. DẤU ẤN LỊCH SỬ</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Thiền phái Trúc Lâm & Phật hoàng Trần Nhân Tông
+        </h2>
         <div class="timeline reveal">
-            <div class="timeline-item">
-                <h4 style="color: var(--secondary);">Thế kỷ XIII</h4>
-                <p>Phật hoàng Trần Nhân Tông từ bỏ ngai vàng, chọn Yên Tử làm nơi tu hành, khai sinh Thiền phái Trúc Lâm.</p>
-            </div>
-            <div class="timeline-item">
-                <h4 style="color: var(--secondary);">Thời Lê - Nguyễn</h4>
-                <p>Hệ thống chùa chiền phía Tây được củng cố, trở thành lá chắn tâm linh quan trọng cho kinh đô.</p>
-            </div>
-            <div class="timeline-item">
-                <h4 style="color: var(--secondary);">Hiện nay</h4>
-                <p>Được phục dựng quy mô lớn, trở thành trung tâm du lịch tâm linh trọng điểm của tỉnh Bắc Giang.</p>
-            </div>
+          <div class="timeline-item">
+            <h4 style="color: var(--secondary)">Nguồn gốc</h4>
+            <p>
+              Nơi gắn liền với con đường hoằng dương Phật pháp của vua Trần Nhân
+              Tông.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <h4 style="color: var(--secondary)">Ý nghĩa</h4>
+            <p>
+              Khẳng định sự độc lập và bản sắc riêng của Phật giáo Việt Nam.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <h4 style="color: var(--secondary)">Kết nối</h4>
+            <p>
+              Tạo nên tam giác di sản tâm linh: Bắc Giang - Quảng Ninh - Hải
+              Dương.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 4: Values -->
+    <!-- Slide 4: Architectural Layers -->
     <section class="slide">
-      <img class="bg-img" src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen-tu-8.jpg" alt="Chùa Hạ Tây Yên Tử">
+      <img
+        class="bg-img"
+        src="https://cdn.xanhsm.com/2025/02/c124747a-chua-tay-yen-tu-8.jpg"
+        alt="Architecture"
+      />
       <div class="overlay"></div>
       <div class="container">
-        <span class="section-num">03. GIÁ TRỊ DI SẢN</span>
-        <h2 style="font-size: 40px; text-align: center; margin-bottom: 10px">Tuyệt tác thiên nhiên & nhân tạo</h2>
-        <div class="card-grid">
-          <div class="card reveal">
-            <i class="fa-solid fa-om"></i>
-            <h3>Tâm Linh Trúc Lâm</h3>
-            <p>Nơi lưu giữ hồn cốt của dòng thiền thuần Việt đầu tiên.</p>
+        <span class="section-num">03. KIẾN TRÚC ĐẶC TRƯNG</span>
+        <h2 style="font-size: 40px; text-align: center; margin-bottom: 30px">
+          Ba tầng không gian tâm linh
+        </h2>
+        <div class="card-grid reveal">
+          <div class="card">
+            <i class="fa-solid fa-archway"></i>
+            <h3>Chùa Hạ</h3>
+            <p>Nơi đặt trung tâm lễ hội, kiến trúc hoành tráng bên suối.</p>
           </div>
-          <div class="card reveal">
-            <i class="fa-solid fa-tree"></i>
-            <h3>Đa dạng Sinh học</h3>
-            <p>Khu rừng nguyên sinh với hàng trăm loài kỳ hoa dị thảo.</p>
+          <div class="card">
+            <i class="fa-solid fa-gopuram"></i>
+            <h3>Chùa Trung</h3>
+            <p>Không gian tĩnh lặng nằm giữa đại ngàn xanh thẳm.</p>
           </div>
-          <div class="card reveal">
-            <i class="fa-solid fa-synagogue"></i>
-            <h3>Nghệ thuật Kiến trúc</h3>
-            <p>Những mái chùa cong vút mang đậm dấu ấn vương triều Trần.</p>
+          <div class="card">
+            <i class="fa-solid fa-landmark-dome"></i>
+            <h3>Chùa Thượng</h3>
+            <p>Đỉnh núi mờ sương, ranh giới giữa đất và trời.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 5: The Pagodas -->
+    <!-- Slide 5: The Primary Forest (NEW) -->
     <section class="slide">
-      <img class="bg-img" src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1920" alt="Mây núi bao phủ">
-      <div class="overlay"></div>
-      <div class="container">
-        <span class="section-num">04. HÀNH TRÌNH KHÁM PHÁ</span>
-        <h2 style="font-size: 40px; margin-bottom: 30px">Ba tầng mây - Ba bậc thiền</h2>
-        <div class="grid-2 reveal">
-            <div class="glass-box">
-                <p style="margin-bottom: 15px;"><strong>Chùa Hạ:</strong> Khu vực quảng trường, nơi diễn ra các lễ hội lớn và các nghi thức văn hóa.</p>
-                <p style="margin-bottom: 15px;"><strong>Chùa Trung:</strong> Nằm giữa lưng chừng núi, không gian tĩnh lặng để nghỉ chân và thiền định.</p>
-                <p><strong>Chùa Thượng:</strong> Điểm cao nhất, nơi bạn có thể chạm tay vào mây trời và nhìn ngắm toàn cảnh Sơn Động.</p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1596395819057-e37f55a8516d?q=80&w=600" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Chùa Thượng trong mây">
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 6: Highlight -->
-    <section class="slide">
-      <img class="bg-img" src="https://media.mybacgiang.vn/resources/portal//Images/BGG/admin.dulich/tay_yen_tu/9_982695817.jpg" alt="Vạn Lý Trường Thành Việt Nam">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920"
+        alt="Forest"
+      />
       <div class="overlay"></div>
       <div class="container">
         <div class="grid-2">
           <div class="glass-box reveal">
-            <h2 style="color: var(--secondary); font-size: 35px">"Vạn Lý Trường Thành" phiên bản Việt</h2>
-            <p style="margin-top: 15px; font-size: 17px; line-height: 1.6">Những bậc thang đá uốn lượn hùng vĩ giữa mây ngàn, tạo nên một "tọa độ" check-in đẳng cấp, khẳng định sức sống mãnh liệt của con người trước thiên nhiên.</p>
+            <span class="section-num">04. HỆ SINH THÁI</span>
+            <h2 style="font-size: 35px; color: var(--secondary)">
+              Khu bảo tồn thiên nhiên quý giá
+            </h2>
+            <p style="margin-top: 15px; font-size: 17px; line-height: 1.7">
+              Sở hữu hàng ngàn ha rừng nguyên sinh với hệ thực vật đa dạng bậc
+              nhất miền Bắc. Đây là nơi trú ngụ của nhiều loài động thực vật quý
+              hiếm nằm trong Sách Đỏ.
+            </p>
+          </div>
+          <div class="reveal">
+            <ul class="feature-list" style="font-size: 20px">
+              <li><i class="fa-solid fa-leaf"></i> Cây cổ thụ ngàn năm</li>
+              <li><i class="fa-solid fa-crow"></i> Chim và thú quý hiếm</li>
+              <li><i class="fa-solid fa-water"></i> Thác nước và suối ngầm</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Great Wall Highlight -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://media.mybacgiang.vn/resources/portal//Images/BGG/admin.dulich/tay_yen_tu/9_982695817.jpg"
+        alt="Great Wall"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="grid-2">
+          <div class="glass-box reveal">
+            <h2 style="color: var(--secondary); font-size: 35px">
+              "Vạn Lý Trường Thành" phiên bản Việt
+            </h2>
+            <p style="margin-top: 15px; font-size: 17px; line-height: 1.6">
+              Những bậc thang đá dài tít tắp men theo sườn núi, tạo nên khung
+              cảnh hùng vĩ giúp chúng ta có những bức ảnh "triệu view".
+            </p>
           </div>
           <div class="reveal" style="text-align: right">
-            <h1 style="font-size: 100px; opacity: 0.15; color: var(--secondary);">GRAND VIEW</h1>
+            <h1 style="font-size: 110px; opacity: 0.1; color: var(--secondary)">
+              MAJESTIC
+            </h1>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 7: Best Time -->
+    <!-- Slide 7: Spring Festival (NEW) -->
     <section class="slide">
-        <img class="bg-img" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920" alt="Hoàng hôn trên núi">
-        <div class="overlay"></div>
-        <div class="container">
-          <span class="section-num">05. THỜI ĐIỂM VÀNG</span>
-          <h2 style="font-size: 40px; margin-bottom: 30px">Mùa nào Tây Yên Tử đẹp nhất?</h2>
-          <div class="grid-2 reveal">
-              <div class="card">
-                  <h4 style="color: var(--secondary); margin-bottom: 10px;">Mùa Xuân (Tháng 1 - 3)</h4>
-                  <p>Mùa lễ hội, sương mù huyền ảo, lý tưởng cho những ai muốn cầu may mắn và bình an đầu năm.</p>
-              </div>
-              <div class="card">
-                <h4 style="color: var(--secondary); margin-bottom: 10px;">Mùa Hè (Tháng 5 - 8)</h4>
-                <p>Khí hậu mát mẻ như "Đà Lạt của Bắc Giang", là nơi trốn nóng tuyệt vời để trekking và săn mây.</p>
-            </div>
-          </div>
-        </div>
-    </section>
-
-    <!-- Slide 8: Experiences -->
-    <section class="slide">
-      <img class="bg-img" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920" alt="Hệ thống cáp treo">
+      <img
+        class="bg-img"
+        src="https://cdn.xanhsm.com/2025/02/3ca11274-chua-tay-yen-tu-13-768x512.jpg"
+        alt="Festival"
+      />
       <div class="overlay"></div>
       <div class="container">
-        <span class="section-num">06. DỊCH VỤ & TRẢI NGHIỆM</span>
+        <span class="section-num">05. VĂN HÓA LỄ HỘI</span>
+        <h2 style="font-size: 40px; margin-bottom: 25px">
+          Hội Xuân Tây Yên Tử
+        </h2>
+        <p
+          style="font-size: 19px; max-width: 800px; line-height: 1.8"
+          class="reveal"
+        >
+          Diễn ra từ ngày 12 tháng Giêng hằng năm. Đây là thời điểm rộn ràng
+          nhất với các hoạt động rước kiệu, trò chơi dân gian và biểu diễn văn
+          hóa nghệ thuật của đồng bào các dân tộc thiểu số địa phương.
+        </p>
+        <div class="card-grid reveal" style="margin-top: 40px">
+          <div class="card"><h4>Lễ rước kiệu</h4></div>
+          <div class="card"><h4>Hát Then, hát Soọng Cô</h4></div>
+          <div class="card"><h4>Thi bắn nỏ, đẩy gậy</h4></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Best Time to Visit -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920"
+        alt="Sunlight"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">06. THỜI ĐIỂM VÀNG</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Khi nào Tây Yên Tử đẹp nhất?
+        </h2>
+        <div class="grid-2 reveal">
+          <div class="card">
+            <h4 style="color: var(--secondary); margin-bottom: 10px">
+              Mùa Xuân rạng rỡ
+            </h4>
+            <p>
+              Từ tháng 1 - tháng 3 âm lịch: Không khí trong lành, sương mù ảo
+              diệu, phù hợp đi lễ cầu may.
+            </p>
+          </div>
+          <div class="card">
+            <h4 style="color: var(--secondary); margin-bottom: 10px">
+              Mùa Hè mát lạnh
+            </h4>
+            <p>
+              Tháng 5 - tháng 8: Trốn nắng Yên Dũng, tận hưởng bầu không khí 20
+              độ C trên đỉnh núi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: Experiences & Services -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920"
+        alt="Cable Car"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">07. DỊCH VỤ TRẢI NGHIỆM</span>
         <div class="grid-2" style="margin-top: 20px">
           <div class="reveal">
-            <div style="background: rgba(212, 175, 55, 0.1); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--secondary);">
-              <h4 style="color: var(--secondary);"><i class="fa-solid fa-cable-car"></i> Cáp treo hiện đại</h4>
-              <p>Chỉ 10 phút để bay qua thảm rừng xanh mướt.</p>
+            <div class="glass-box" style="margin-bottom: 20px">
+              <h4 style="color: var(--secondary); font-size: 24px">
+                <i class="fa-solid fa-cable-car"></i> Cáp treo xuyên mây
+              </h4>
+              <p style="margin-top: 10px">
+                Trải nghiệm ngồi cabin lướt trên ngọn cây rừng nguyên sinh cực
+                kỳ thú vị.
+              </p>
             </div>
-            <div style="background: rgba(212, 175, 55, 0.1); padding: 20px; border-radius: 15px; border-left: 4px solid var(--secondary);">
-              <h4 style="color: var(--secondary);"><i class="fa-solid fa-camera-retro"></i> Săn mây Cổng Trời</h4>
-              <p>Khoảnh khắc bình minh mờ ảo đẹp như phim điện ảnh.</p>
+            <div class="glass-box">
+              <h4 style="color: var(--secondary); font-size: 24px">
+                <i class="fa-solid fa-camera-retro"></i> Săn mây Cổng Trời
+              </h4>
+              <p style="margin-top: 10px">
+                Địa điểm "sống ảo" hot nhất Bắc Giang dành cho giới trẻ.
+              </p>
             </div>
           </div>
-          <div class="reveal glass-box" style="padding: 20px;">
+          <div class="reveal glass-box">
             <table class="custom-table">
-              <tr><th>Dịch vụ</th><th>Tham khảo</th></tr>
-              <tr><td>Cáp treo khứ hồi</td><td>260.000đ</td></tr>
-              <tr><td>Xe điện chuyển tiếp</td><td>20.000đ</td></tr>
-              <tr><td>Cơm chay/Mặn</td><td>150.000đ</td></tr>
+              <tr>
+                <th>Dịch vụ</th>
+                <th>Giá tham khảo</th>
+              </tr>
+              <tr>
+                <td>Cáp treo khứ hồi</td>
+                <td>260.000đ</td>
+              </tr>
+              <tr>
+                <td>Xe điện lượt</td>
+                <td>10.000đ</td>
+              </tr>
+              <tr>
+                <td>Cơm xuất du lịch</td>
+                <td>~150.000đ</td>
+              </tr>
             </table>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 9: Student Mission -->
-    <section class="slide" style="background: #0d1b15;">
-        <div class="overlay" style="background: radial-gradient(circle, rgba(27, 67, 50, 0.6) 0%, #050f0c 100%);"></div>
-        <div class="container" style="text-align: center;">
-          <span class="section-num" style="display: inline-block;">07. SỨ MỆNH GEN Z</span>
-          <h2 style="font-size: 50px; margin-bottom: 30px; color: var(--secondary);">Người trẻ Bắc Giang - Đại sứ du lịch</h2>
-          <div class="card-grid reveal">
-              <div class="card">
-                  <i class="fa-solid fa-share-nodes"></i>
-                  <p>Lan tỏa hình ảnh quê hương qua mạng xã hội (TikTok, FB, Insta).</p>
-              </div>
-              <div class="card">
-                  <i class="fa-solid fa-hand-holding-heart"></i>
-                  <p>Du lịch văn minh: Không xả rác, tôn trọng văn hóa tâm linh.</p>
-              </div>
-              <div class="card">
-                  <i class="fa-solid fa-graduation-cap"></i>
-                  <p>Học tập tốt để mai sau xây dựng quê hương giàu đẹp hơn.</p>
-              </div>
-          </div>
-        </div>
-    </section>
-
-    <!-- Slide 10: Quote -->
+    <!-- Slide 10: Local Food (NEW) -->
     <section class="slide">
-      <img class="bg-img" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920" alt="Thiên nhiên hùng vĩ">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1920"
+        alt="Food"
+      />
       <div class="overlay"></div>
-      <div class="container" style="text-align: center">
-        <div class="reveal">
-          <blockquote>"Bắc Giang không chỉ có vải thiều. Bắc Giang còn có một Tây Yên Tử hùng vĩ, chờ bước chân tuổi trẻ của chúng mình đến để viết tiếp những trang sử mới."</blockquote>
-          <div style="margin-top: 40px">
-            <p style="font-size: 20px; letter-spacing: 5px; color: var(--secondary);">#YENDUNG3 #12A2 #GENZ_TRAVEL</p>
+      <div class="container">
+        <span class="section-num">08. ẨM THỰC ĐỊA PHƯƠNG</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Hương vị núi rừng Sơn Động
+        </h2>
+        <div class="card-grid reveal">
+          <div class="card">
+            <i class="fa-solid fa-bowl-food"></i>
+            <h3>Gà đồi Sơn Động</h3>
+            <p>Thịt gà săn chắc, thơm ngon đặc trưng vùng núi.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Xôi trứng kiến</h3>
+            <p>Món ăn độc đáo của đồng bào dân tộc Tày.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-stroopwafel"></i>
+            <h3>Chè kho Mỹ Độ</h3>
+            <p>Món tráng miệng truyền thống nức tiếng gần xa.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 11: Final Info -->
+    <!-- Slide 11: Connectivity (NEW) -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1920"
+        alt="Nearby"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">09. KẾT NỐI HÀNH TRÌNH</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Những điểm đến lân cận
+        </h2>
+        <div class="grid-2 reveal">
+          <div class="glass-box">
+            <h3>Đồng Cao</h3>
+            <p>
+              Được ví như "Mẫu Sơn" của Bắc Giang với thảo nguyên cỏ xanh mướt.
+            </p>
+          </div>
+          <div class="glass-box">
+            <h3>Khe Rỗ</h3>
+            <p>
+              Khu rừng nguyên sinh với những dòng suối trong vắt và mát lạnh.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 12: Preparation Checklist (NEW) -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1502219684198-fa9b5164d9d7?q=80&w=1920"
+        alt="Pack"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">10. CẨM NANG CHUẨN BỊ</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Đi Tây Yên Tử cần mang theo gì?
+        </h2>
+        <div class="card-grid reveal">
+          <div class="card">
+            <i class="fa-solid fa-shoe-prints"></i>
+            <p>Giày thể thao êm chân (đi bộ khá nhiều).</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-shirt"></i>
+            <p>Áo khoác mỏng (trên đỉnh núi khá lạnh).</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-bottle-water"></i>
+            <p>Bình nước cá nhân và đồ ăn nhẹ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 13: Mental Health (NEW) -->
+    <section class="slide" style="background: #0d1b15">
+      <div class="container" style="text-align: center">
+        <span class="section-num" style="display: inline-block"
+          >11. GÓC DÀNH CHO LỚP 12</span
+        >
+        <h2
+          style="font-size: 45px; margin-bottom: 25px; color: var(--secondary)"
+        >
+          Trạm sạc năng lượng cuối cấp
+        </h2>
+        <p
+          style="
+            font-size: 20px;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+          "
+          class="reveal"
+        >
+          Sau những giờ học căng thẳng và kỳ thi cam go, Tây Yên Tử chính là nơi
+          để chúng ta "F5" lại tâm trí, hít thở không khí đại ngàn và cầu mong
+          những điều tốt đẹp nhất cho chặng đường sắp tới.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slide 14: Sustainable Tourism (NEW) -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920"
+        alt="Green"
+      />
+      <div class="overlay"></div>
+      <div class="container">
+        <span class="section-num">12. DU LỊCH VĂN MINH</span>
+        <h2 style="font-size: 40px; margin-bottom: 30px">
+          Đừng để lại gì ngoài những dấu chân
+        </h2>
+        <div class="card-grid reveal">
+          <div class="card">
+            <i class="fa-solid fa-trash-can"></i>
+            <p>Nói không với xả rác bừa bãi tại khu du lịch.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-shield-heart"></i>
+            <p>Bảo vệ cây cối và hệ thực vật nguyên sinh.</p>
+          </div>
+          <div class="card">
+            <i class="fa-solid fa-person-praying"></i>
+            <p>Tôn trọng các quy định về trang phục tại nơi tâm linh.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15: Mission Gen Z -->
+    <section class="slide">
+      <img
+        class="bg-img"
+        src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920"
+        alt="Ending"
+      />
+      <div class="overlay"></div>
+      <div class="container" style="text-align: center">
+        <div class="reveal">
+          <blockquote style="font-size: 32px">
+            "Quê hương mình đẹp lắm, nhưng nó cần đôi bàn tay và khối óc của thế
+            hệ chúng mình để vươn xa hơn trên bản đồ thế giới."
+          </blockquote>
+          <div style="margin-top: 40px">
+            <p
+              style="
+                font-size: 20px;
+                letter-spacing: 5px;
+                color: var(--secondary);
+              "
+            >
+              #YENDUNG3 #12A2 #PRIDE_BACGIANG
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 16: Final -->
     <section class="slide" style="background: #1b4332">
       <div class="container" style="text-align: center">
-        <h2 class="reveal" style="font-size: 60px; color: var(--secondary); margin-bottom: 20px;">HẸN GẶP TẠI TÂY YÊN TỬ!</h2>
-        <p class="reveal" style="font-size: 24px; opacity: 0.9; margin-bottom: 60px; font-weight: 600;">Tập thể lớp 12A2 - Trường THPT Yên Dũng số 3</p>
-        
-        <p class="reveal" style="font-size: 18px; opacity: 0.8; font-style: italic;">Cảm ơn thầy cô và các bạn đã chú ý lắng nghe!</p>
+        <h2
+          class="reveal"
+          style="font-size: 60px; color: var(--secondary); margin-bottom: 20px"
+        >
+          HẸN GẶP TẠI TÂY YÊN TỬ!
+        </h2>
+        <p
+          class="reveal"
+          style="font-size: 26px; font-weight: 600; margin-bottom: 50px"
+        >
+          Tập thể lớp 12A2 - Trường THPT Yên Dũng số 3
+        </p>
+        <div class="reveal" style="font-size: 18px; opacity: 0.8">
+          Cảm ơn thầy cô và các bạn đã chú ý lắng nghe bài thuyết trình của lớp
+          chúng em!
+        </div>
       </div>
     </section>
 
@@ -353,10 +764,14 @@
       const observerOptions = { threshold: 0.4 };
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) { entry.target.classList.add("active"); }
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
         });
       }, observerOptions);
-      document.querySelectorAll(".slide").forEach((slide) => { observer.observe(slide); });
+      document.querySelectorAll(".slide").forEach((slide) => {
+        observer.observe(slide);
+      });
     </script>
   </body>
 </html>
